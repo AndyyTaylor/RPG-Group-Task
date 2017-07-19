@@ -17,8 +17,8 @@ public class Map {
     }
     
     public void render(List<RenderObject> renderQueue) {
-        for (int i = 0; i < field.Count; i++) {
-            renderQueue.Add(field[i].getRenderObject());
+        foreach (Tile tile in field) {
+            renderQueue.Add(tile.getRenderObject());
         }
     }
 }

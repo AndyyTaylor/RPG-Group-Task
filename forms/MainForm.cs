@@ -20,8 +20,8 @@ public class MainForm : Form {  /* Main display window */
     }
     
     protected override void OnPaint(PaintEventArgs e) {
-        for (int i = 0; i < renderQueue.Count; i++) {
-            renderQueue[i].render(e);
+        foreach (RenderObject renderObject in renderQueue) {
+            renderObject.render(e);
         }
         
         renderQueue.Clear();
