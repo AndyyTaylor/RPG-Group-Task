@@ -1,1 +1,1 @@
-mcs main.cs forms/mainForm.cs framework/EventHandler.cs framework/Map.cs -pkg:dotnet
+mcs main.cs forms/mainForm.cs framework/EventHandler.cs framework/Map.cs rendering/RenderObject.cs rendering/RenderRect.cs objects/Tile.cs objects/Grass.cs -pkg:dotnet

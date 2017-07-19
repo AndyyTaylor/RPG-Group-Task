@@ -1,8 +1,11 @@
 using System;
 using System.Windows.Forms;
 using System.Drawing;
+using System.Collections.Generic;
 
-public class MainForm : Form {
+public class MainForm : Form {  /* Main display window */
+    private List<RenderObject> renderQueue = new List<RenderObject>();
+    
     public MainForm (MainClass mainClass) {
         Text = "RPG Game";
         Size = new Size(900, 700);
@@ -12,8 +15,19 @@ public class MainForm : Form {
         this.Show();
     }
     
+    public void addToRenderQueue(RenderObject o) {
+        renderQueue.Add(o);
+    }
+    
     protected override void OnPaint(PaintEventArgs e) {
-        SolidBrush blackPen = new SolidBrush(Color.Black);
-        e.Graphics.FillRectangle(blackPen, 0, 0, 200, 200);
+        for (int i = 0; i < renderQueue.Count; i++) {
+            renderQueue[i].render(e);
+        }
+        
+        renderQueue.Clear();
+    }
+    
+    public List<RenderObject> getRenderQueue() {
+        return renderQueue;
     }
 }

@@ -1,5 +1,6 @@
 using System;
 using System.Windows.Forms;
+using System.Drawing;
 
 public class MainClass {    // OOP ftw
     MainForm mainForm;
@@ -12,19 +13,17 @@ public class MainClass {    // OOP ftw
         mainForm = new MainForm(this);
         eventHandler = new EventHandler(mainForm);
         gameMap = new Map();
-        
-        Application.Run(mainForm);  // Seems to handle quit events etc
     }
     
-    public void update() {
+    public void update() {  /* Performs code logic */
         
     }
     
-    public void render() {
-        
+    public void render() {  /* Adds all rendering to mainForm.renderQueue */
+        gameMap.render(mainForm.getRenderQueue());
     }
     
-    public void exit(Object sender, FormClosingEventArgs e) {
+    public void exit(Object sender, FormClosingEventArgs e) {  /* When window is closed */
         closed = true;
     }
     
@@ -32,12 +31,14 @@ public class MainClass {    // OOP ftw
         return closed;
     }
     
-    static public void Main () {
+    static public void Main () {  /* Main game loop */
         MainClass mainClass = new MainClass();
         
         while (!mainClass.checkClosed()) {
             mainClass.update();
             mainClass.render();
+            
+            Application.DoEvents();
         }
         
         System.Console.WriteLine("Exiting...");
