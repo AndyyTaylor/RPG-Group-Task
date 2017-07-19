@@ -1,0 +1,1 @@
+mcs main.cs forms/mainForm.cs framework/EventHandler.cs framework/Map.cs -pkg:dotnet
