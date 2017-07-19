@@ -1,1 +1,3 @@
-# RPG-Group-Task
+# RPG Group Task
+#### By Lachie and Andy
+
