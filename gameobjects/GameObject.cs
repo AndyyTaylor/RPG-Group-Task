@@ -7,4 +7,7 @@ public abstract class Object() {
         x = _x;
         y = _y;
     }
+    
+    public abstract update();
+    public abstract render();
 }
