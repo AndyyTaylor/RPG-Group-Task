@@ -2,9 +2,10 @@ using System;
 using System.Collections.Generic;
 
 public class Map {
+    public const int SCALE = 700/(HEIGHT+1);
+    
     private const int WIDTH = 20;
     private const int HEIGHT = 20;
-    private const int SCALE = 700/(HEIGHT+1);
     
     private List<Tile> field = new List<Tile>();
     

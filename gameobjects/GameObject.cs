@@ -1,13 +1,19 @@
 using System;
+using System.Drawing;
+using System.Collections.Generic;
 
-public abstract class Object() {
-    protected int x, y;
+public abstract class GameObject {
+    protected int x, y, w, h;
     
-    public Object(int _x, int _y) {
+    public GameObject(int _x, int _y, int _w, int _h) {
         x = _x;
         y = _y;
+        w = _w;
+        h = _h;
     }
     
-    public abstract update();
-    public abstract render();
+    public abstract void update();
+    public abstract void render(List<RenderObject> renderQueue);
+    
+    public void moveX(int amt) { x += amt; }
 }

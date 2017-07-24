@@ -6,21 +6,25 @@ public class MainClass {    // OOP ftw
     MainForm mainForm;
     EventHandler eventHandler;
     Map gameMap;
+    Player player;
     
     bool closed = false;
     
     public MainClass() {
         mainForm = new MainForm(this);
-        eventHandler = new EventHandler(mainForm);
         gameMap = new Map();
+        player = new Player(1, 1, Map.SCALE, Map.SCALE);
+        
+        eventHandler = new EventHandler(mainForm, player);
     }
     
     public void update() {  /* Performs code logic */
-        
+        // player.update();
     }
     
     public void render() {  /* Adds all rendering to mainForm.renderQueue */
         gameMap.render(mainForm.getRenderQueue());
+        // player.render(mainForm.getRenderQueue());
     }
     
     public void exit(Object sender, FormClosingEventArgs e) {  /* When window is closed */
