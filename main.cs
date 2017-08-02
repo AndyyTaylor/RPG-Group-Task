@@ -19,12 +19,14 @@ public class MainClass {    // OOP ftw
     }
     
     public void update() {  /* Performs code logic */
-        // player.update();
+        player.update();
     }
     
     public void render() {  /* Adds all rendering to mainForm.renderQueue */
         gameMap.render(mainForm.getRenderQueue());
-        // player.render(mainForm.getRenderQueue());
+        player.render(mainForm.getRenderQueue());
+        
+        mainForm.Refresh();
     }
     
     public void exit(Object sender, FormClosingEventArgs e) {  /* When window is closed */

@@ -8,7 +8,7 @@ public class Player : GameObject {
     }
     
     public override void update() {
-        System.Console.WriteLine(x);
+        // System.Console.WriteLine(x);
     }
     
     public override void render(List<RenderObject> renderQueue) {
