@@ -7,6 +7,6 @@ public class Grass : Tile {
     }
 
     public override RenderObject getRenderObject() {
-        return new RenderRect(x, y, w, h, Color.Gray);
+        return new RenderRect(x, y, w, h, Color.Green);
     }
 }

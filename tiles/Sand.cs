@@ -7,6 +7,6 @@ public class Sand : Tile {
     }
 
     public override RenderObject getRenderObject() {
-        return new RenderRect(x, y, w, h, Color.Red);
+        return new RenderRect(x, y, w, h, Color.Yellow);
     }
 }
