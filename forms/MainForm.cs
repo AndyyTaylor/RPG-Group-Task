@@ -23,7 +23,6 @@ public class MainForm : Form {  /* Main display window */
         foreach (RenderObject renderObject in renderQueue) {
             renderObject.render(e);
         }
-        System.Console.WriteLine("paint");
         renderQueue.Clear();
     }
     

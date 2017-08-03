@@ -4,21 +4,61 @@ using System.Windows.Forms;
 public class EventHandler {
     Player player;
     
+    bool aPressed, dPressed, sPressed, wPressed;
+    
     public EventHandler(Form mainForm, Player _player) {
         player = _player;
         
         mainForm.KeyPreview = true;
-        mainForm.KeyPress += new KeyPressEventHandler(checkEvent);
+        mainForm.KeyDown += new KeyEventHandler(keyDown);
+        mainForm.KeyUp += new KeyEventHandler(keyUp);
     }
     
-    public void checkEvent(object sender, KeyPressEventArgs e) {
+    public void keyDown(object sender, KeyEventArgs e) {
         e.Handled = true;
-        switch (Char.ToUpper(e.KeyChar)) {
-            case ((char) Keys.A):
-                player.moveX(-30);     // TODO: move by booleans, key down / key up
+        
+        switch (e.KeyCode) {
+            case (Keys.A):
+                if (!aPressed) player.toggleMoveLeft();
+                aPressed = true;
                 break;
-            case ((char) Keys.D):
-                player.moveX(30);
+            case (Keys.D):
+                if (!dPressed) player.toggleMoveRight();
+                dPressed = true;
+                break;
+            case (Keys.S):
+                if (!sPressed) player.toggleMoveDown();
+                sPressed = true;
+                break;
+            case (Keys.W):
+                if (!wPressed) player.toggleMoveUp();
+                wPressed = true;
+                break;
+            default:
+                e.Handled = false;
+                break;
+        }
+    }
+    
+    public void keyUp(object sender, KeyEventArgs e) {
+        e.Handled = true;
+        
+        switch (e.KeyCode) {
+            case (Keys.A):
+                aPressed = false;
+                player.toggleMoveLeft();
+                break;
+            case (Keys.D):
+                dPressed = false;
+                player.toggleMoveRight();
+                break;
+            case (Keys.S):
+                sPressed = false;
+                player.toggleMoveDown();
+                break;
+            case (Keys.W):
+                wPressed = false;
+                player.toggleMoveUp();
                 break;
             default:
                 e.Handled = false;

@@ -1,1 +1,1 @@
-mcs main.cs forms/mainForm.cs framework/EventHandler.cs framework/Map.cs rendering/RenderObject.cs rendering/RenderRect.cs tiles/Tile.cs tiles/Grass.cs gameobjects/GameObject.cs gameobjects/Player.cs -pkg:dotnet
+mcs main.cs forms/mainForm.cs framework/EventHandler.cs framework/Map.cs rendering/RenderObject.cs rendering/RenderRect.cs tiles/Tile.cs tiles/Grass.cs tiles/Sand.cs tiles/Water.cs gameobjects/GameObject.cs gameobjects/Player.cs -pkg:dotnet

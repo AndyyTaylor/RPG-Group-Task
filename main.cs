@@ -1,12 +1,14 @@
 using System;
 using System.Windows.Forms;
 using System.Drawing;
+using System.Diagnostics;
 
 public class MainClass {    // OOP ftw
     MainForm mainForm;
     EventHandler eventHandler;
     Map gameMap;
     Player player;
+    static Stopwatch stopWatch;
     
     bool closed = false;
     
@@ -39,12 +41,17 @@ public class MainClass {    // OOP ftw
     
     static public void Main () {  /* Main game loop */
         MainClass mainClass = new MainClass();
+        stopWatch = new Stopwatch();
         
         while (!mainClass.checkClosed()) {
+            stopWatch.Start();
             mainClass.update();
             mainClass.render();
             
             Application.DoEvents();
+            System.Console.WriteLine(stopWatch.Elapsed);
+            stopWatch.Restart();
+            
         }
         
         System.Console.WriteLine("Exiting...");
