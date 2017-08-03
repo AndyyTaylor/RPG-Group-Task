@@ -8,7 +8,7 @@ public class MainClass {    // OOP ftw
     EventHandler eventHandler;
     Map gameMap;
     Player player;
-    Enemy Enemy;
+    Enemy enemy;
     static Stopwatch stopWatch;
 
     bool closed = false;
