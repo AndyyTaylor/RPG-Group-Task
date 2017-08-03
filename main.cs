@@ -17,6 +17,7 @@ public class MainClass {    // OOP ftw
         mainForm = new MainForm(this);
         gameMap = new Map();
         player = new Player(1, 1, Map.SCALE, Map.SCALE);
+        enemy = new Enemy(1, 1, Map.SCALE, Map.SCALE);
 
         eventHandler = new EventHandler(mainForm, player);
     }
