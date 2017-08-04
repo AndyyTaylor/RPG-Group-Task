@@ -4,6 +4,8 @@ using System.Drawing;
 using System.Diagnostics;
 
 public class MainClass {    // OOP ftw
+
+    // Forms
     MainForm mainForm;
     EventHandler eventHandler;
     Map gameMap;
@@ -17,7 +19,7 @@ public class MainClass {    // OOP ftw
         mainForm = new MainForm(this);
         gameMap = new Map();
         player = new Player(1, 1, Map.SCALE, Map.SCALE);
-        Enemy = new Enemy(50, 50, Map.SCALE, Map.SCALE);
+        Enemy = new Enemy(50, 400, Map.SCALE, Map.SCALE);
 
         eventHandler = new EventHandler(mainForm, player);
     }
@@ -50,7 +52,7 @@ public class MainClass {    // OOP ftw
             stopWatch.Start();
             mainClass.update();
             mainClass.render();
-            
+
             Application.DoEvents();
             System.Console.WriteLine(stopWatch.Elapsed);
             stopWatch.Restart();
