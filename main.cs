@@ -24,14 +24,15 @@ public class MainClass {    // OOP ftw
 
     public void update() {  /* Performs code logic */
         player.update();
+        
+        mainForm.Invalidate();
     }
 
     public void render() {  /* Adds all rendering to mainForm.renderQueue */
+        mainForm.clearQueue();
         gameMap.render(mainForm.getRenderQueue());
         player.render(mainForm.getRenderQueue());
         enemy.render(mainForm.getRenderQueue());
-
-        mainForm.Refresh();
     }
 
     public void exit(Object sender, FormClosingEventArgs e) {  /* When window is closed */

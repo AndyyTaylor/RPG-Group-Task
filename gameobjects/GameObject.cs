@@ -16,4 +16,8 @@ public abstract class GameObject {
     public abstract void render(List<RenderObject> renderQueue);
     
     public void moveX(int amt) { x += amt; }
+    public void moveY(int amt) { y += amt; }
+    
+    public int getX() { return x; }
+    public int getY() { return y; }
 }
