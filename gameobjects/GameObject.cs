@@ -16,6 +16,7 @@ public abstract class GameObject {
     public abstract void update();
     public abstract void render(List<RenderObject> renderQueue);
     public void moveX(int amt) { x += amt; }
+<<<<<<< HEAD
 
     public int GetX() {
       return x;
@@ -25,4 +26,10 @@ public abstract class GameObject {
       return y;
     }
 
+=======
+    public void moveY(int amt) { y += amt; }
+    
+    public int getX() { return x; }
+    public int getY() { return y; }
+>>>>>>> 53248468d816bee878cbd2110506fd98f2a5f126
 }
