@@ -26,13 +26,6 @@ public class MainClass {    // OOP ftw
 
     public void update() {  /* Performs code logic */
         player.update();
-<<<<<<< HEAD
-        Enemy.moveToPlayer(player);
-
-=======
-        
-        mainForm.Invalidate();
->>>>>>> 53248468d816bee878cbd2110506fd98f2a5f126
     }
 
     public void render() {  /* Adds all rendering to mainForm.renderQueue */
@@ -59,7 +52,7 @@ public class MainClass {    // OOP ftw
             mainClass.render();
 
             Application.DoEvents();
-            //System.Console.WriteLine(stopWatch.Elapsed);
+            System.Console.WriteLine(stopWatch.Elapsed);
             stopWatch.Restart();
 
         }
