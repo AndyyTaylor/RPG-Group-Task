@@ -34,13 +34,6 @@ public class MainClass {    // OOP ftw
         mainForm.clearQueue();
         gameMap.render(mainForm.getRenderQueue());
         player.render(mainForm.getRenderQueue());
-<<<<<<< HEAD
-        enemy.render(mainForm.getRenderQueue());
-=======
-        Enemy.render(mainForm.getRenderQueue());
-
-        mainForm.Refresh();
->>>>>>> dc22aaab8f8c7022d56dc4f12ce440ba2dcc8f8f
     }
 
     public void exit(Object sender, FormClosingEventArgs e) {  /* When window is closed */
