@@ -4,6 +4,7 @@ using System.Collections.Generic;
 
 public abstract class GameObject {
     protected int x, y, w, h;
+    public int health = 100;
 
     public GameObject(int _x, int _y, int _w, int _h) {
         x = _x;
@@ -15,4 +16,13 @@ public abstract class GameObject {
     public abstract void update();
     public abstract void render(List<RenderObject> renderQueue);
     public void moveX(int amt) { x += amt; }
+
+    public int GetX() {
+      return x;
+    }
+
+    public int GetY() {
+      return y;
+    }
+
 }

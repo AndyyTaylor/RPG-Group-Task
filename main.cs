@@ -26,6 +26,8 @@ public class MainClass {    // OOP ftw
 
     public void update() {  /* Performs code logic */
         player.update();
+        Enemy.moveToPlayer(player);
+
     }
 
     public void render() {  /* Adds all rendering to mainForm.renderQueue */
@@ -54,7 +56,7 @@ public class MainClass {    // OOP ftw
             mainClass.render();
 
             Application.DoEvents();
-            System.Console.WriteLine(stopWatch.Elapsed);
+            //System.Console.WriteLine(stopWatch.Elapsed);
             stopWatch.Restart();
 
         }
