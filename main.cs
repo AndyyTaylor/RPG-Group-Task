@@ -4,11 +4,13 @@ using System.Drawing;
 using System.Diagnostics;
 
 public class MainClass {    // OOP ftw
+
+    // Forms
     MainForm mainForm;
     EventHandler eventHandler;
     Map gameMap;
     Player player;
-    Enemy enemy;
+    Enemy Enemy;
     static Stopwatch stopWatch;
 
     bool closed = false;
@@ -17,7 +19,7 @@ public class MainClass {    // OOP ftw
         mainForm = new MainForm(this);
         gameMap = new Map();
         player = new Player(1, 1, Map.SCALE, Map.SCALE);
-        enemy = new Enemy(1, 1, Map.SCALE, Map.SCALE);
+        Enemy = new Enemy(50, 400, Map.SCALE, Map.SCALE);
 
         eventHandler = new EventHandler(mainForm, player);
     }
@@ -32,7 +34,13 @@ public class MainClass {    // OOP ftw
         mainForm.clearQueue();
         gameMap.render(mainForm.getRenderQueue());
         player.render(mainForm.getRenderQueue());
+<<<<<<< HEAD
         enemy.render(mainForm.getRenderQueue());
+=======
+        Enemy.render(mainForm.getRenderQueue());
+
+        mainForm.Refresh();
+>>>>>>> dc22aaab8f8c7022d56dc4f12ce440ba2dcc8f8f
     }
 
     public void exit(Object sender, FormClosingEventArgs e) {  /* When window is closed */
