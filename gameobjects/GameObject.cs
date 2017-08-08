@@ -13,7 +13,7 @@ public abstract class GameObject {
         h = _h;
     }
 
-    public abstract void update();
+    public abstract void update(Map gameMap);
     public abstract void render(List<RenderObject> renderQueue);
     public void moveX(int amt) { x += amt; }
 

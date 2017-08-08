@@ -8,18 +8,19 @@ public class Player : GameObject {
 
     }
 
-    public override void update() {
+    public override void update(Map gameMap) {
+        int dx = 10, dy = 10;
         if (movingRight) {
-            x += 10;
+            dx = 10;
         }
         if (movingLeft) {
-            x -= 10;
+            dx = -10;
         }
         if (movingDown) {
-            y += 10;
+            dy = 10;
         }
         if (movingUp) {
-            y -= 10;
+            dy = -10;
         }
     }
 

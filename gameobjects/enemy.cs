@@ -6,7 +6,7 @@ public class Enemy : GameObject {
     public Enemy(int _x, int _y, int _w, int _h) : base(_x, _y, _w, _h) {
 
     }
-    public override void update() {
+    public override void update(Map gameMap) {
 
     }
 
