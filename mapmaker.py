@@ -1,74 +1,72 @@
-# Random Map File Generator
-# by Peter Howse
-# Bugs email: p.howse@tsc.nsw.edu.au
-#
 # Outputs a map file in the folder where the script
 # is run. File format:
 # x|y|terrain type|passable terrain boolean|item
-#
-# If you re-run the script, you will need to delete the
-# old file first, otherwise it just keeps adding to the
-# end of the file
 
-import random
+from random import random
 
-# Define the type of terrain available and whether it is
-# passable or not.
-# NOTE: the first terrain type is the most common
-terrain = [
-    ["grass", True],
-    ["sand", True],
-    ["water", True],
-    ]
+width = 200
+height = 200
 
-# Define the items of interest for your map
-interest = ["fountain", "dungeon", "monster", "teleport"]
+def clean():
+    global terrain
+    
+    hasCleaned = False
+    for x in range(width):
+        for y in range(height):
+            if terrain[x][y] == "water" and getAdjacent(x, y, "water") <= 1:
+                terrain[x][y] = "grass"
+                hasCleaned = True
+            elif terrain[x][y] == "grass" and getAdjacent(x, y, "grass") + getAdjacent(x, y, "sand") <= 1:
+                terrain[x][y] = "water"
+                hasCleaned = True
+            elif terrain[x][y] == "sand" and getAdjacent(x, y, "sand") == 0:
+                terrain[x][y] = "grass"
+                hasCleaned = True
+                
+    return hasCleaned
 
-# Dimensions of the map
-x = int(input("How many squares across? "))
-y = int(input("How many squares down? "))
+def getAdjacent(x, y, terrainType):
+    global terrain
+    
+    total = 0
+    offs = [[-1, 0], [0, -1], [0, 1], [1, 0]]
+    for o in offs:
+        if x + o[0] < 0 or x + o[0] >= width or y + o[1] < 0 or y + o[1] >= height:
+            continue
+        if terrain[x + o[0]][y + o[1]] == terrainType:
+            total += 1
+    
+    return total
+    
+terrain = []
+for x in range(width):
+    terrain.append([])
+    for y in range(height):
+        terrain[x].append(None)
 
-# How much of the primary terrain do you want?
-grass = int(input("How much grassland (1: Some, 2: Many, 3: Lots)? "))
+for x in range(width):
+    for y in range(height):
+        if random() < min(0.2 + getAdjacent(x, y, "grass")*0.35, 0.95):
+            terrain[x][y] = "grass"
+        else:
+            terrain[x][y] = "water"
+            
 
-# How many special items of interest do you want?
-intlevel = int(input("How interesting do you want the map 1: A little, 2: A bit, 3: Very)"))
+runs = 0
+while (clean() and runs < 10000):
+    runs += 1
 
-# This function determines what is on any particular
-# square of the map
-def make_terrain(thegrass, theinterest):
-    t_pct = [40,60,80]      # modify to adjust liklihood of primary terrain
-    i_pct = [5,10,15,20]    # modify to adjust liklihood of items
+for x in range(width):
+    for y in range(height):
+        if terrain[x][y] == "grass" and getAdjacent(x, y, "water") > 0 and getAdjacent(x, y, "grass") > 0 and random() < 0.3 + getAdjacent(x, y, "sand"):
+            terrain[x][y] = "sand"
+            
+runs = 0
+while (clean() and runs < 10000):
+    runs += 1
 
-    # Terrain definitions
-    x = random.randint(1,100)
-    if x <= t_pct[thegrass]:
-        mapTerrain = "grass"
-        mapPass = True
-    else:
-        x = random.randint(1,len(terrain)-1)
-        mapTerrain = terrain[x][0]
-        mapPass = terrain[x][1]
-
-    # Items
-    x = random.randint(1,100)
-    if x <= i_pct[theinterest]:
-        x = random.randint(0, len(interest)-1)
-        mapInterest = interest[x]
-    else:
-        mapInterest = "none"
-
-    # Returns a list of terrain, passable and items
-    return mapTerrain, mapPass, mapInterest
-
-# For each square across then down.
 f = open("maptest.txt", 'w')
-for xx in range(x):
-    for yy in range(y):
-        maptext = ""
-        t = make_terrain(grass-1, intlevel-1)
-        maptext = str(xx)+"|"+str(yy)+"|"+t[0]+"|"+str(t[1])+"|"+t[2]+"\n"
-        #print (maptext) # uncomment to debug
+for x in range(width):
+    for y in range(height):
+        f.write(str(x) + "|" + str(y) + "|" + str(terrain[x][y]) + "\n")
         
-        
-        f.write(maptext)

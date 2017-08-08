@@ -13,4 +13,7 @@ public abstract class Tile {
     }
 
     public abstract RenderObject getRenderObject();
+    
+    public int getX() { return x; }
+    public int getY() { return y; }
 }

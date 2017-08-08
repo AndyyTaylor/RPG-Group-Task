@@ -18,7 +18,7 @@ public class MainClass {    // OOP ftw
     public MainClass() {
         mainForm = new MainForm(this);
         gameMap = new Map();
-        player = new Player(1, 1, Map.SCALE, Map.SCALE);
+        player = new Player(Map.SCALE * Map.WIDTH, Map.SCALE * Map.HEIGHT, Map.SCALE, Map.SCALE);
         enemy = new Enemy(50, 400, Map.SCALE, Map.SCALE);
 
         eventHandler = new EventHandler(mainForm, player);
@@ -58,7 +58,7 @@ public class MainClass {    // OOP ftw
             mainClass.render();
 
             Application.DoEvents();
-            // System.Console.WriteLine(stopWatch.Elapsed);
+            System.Console.WriteLine(stopWatch.Elapsed);
             stopWatch.Restart();
 
         }

@@ -4,8 +4,8 @@ using System.Collections.Generic;
 
 public class Map {
     // WIDTH AND HEIGHT OF EACH TILE
-    private const int WIDTH = 20;
-    private const int HEIGHT = 20;
+    public const int WIDTH = 30;
+    public const int HEIGHT = 30;
     public const int SCALE = 700/(HEIGHT+1);
     
     private float X_OFFSET = 0;
@@ -30,7 +30,7 @@ public class Map {
     }
     
     public void update(Player player) {
-        int bound = 100;
+        int bound = 200;
         if (player.getX() - (X_OFFSET * SCALE) < bound) {
             X_OFFSET = 1.0f * (player.getX() - bound) / SCALE;
         } else if (player.getX() - (X_OFFSET * SCALE) > SCALE*WIDTH - bound) {
@@ -46,7 +46,11 @@ public class Map {
 
     public void render(List<RenderObject> renderQueue) {
         foreach (Tile tile in field) {
-            renderQueue.Add(tile.getRenderObject());
+            if (tile.getX() + SCALE - X_OFFSET * SCALE > 0
+                && tile.getX() - X_OFFSET * SCALE < SCALE * WIDTH
+                && tile.getY() + SCALE - Y_OFFSET * SCALE > 0
+                && tile.getY() - SCALE - Y_OFFSET * SCALE < SCALE * HEIGHT)
+                renderQueue.Add(tile.getRenderObject());
         }
     }
     
