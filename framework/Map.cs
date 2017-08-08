@@ -42,9 +42,6 @@ public class Map {
         } else if (player.getY() - (Y_OFFSET * SCALE) > SCALE*HEIGHT - bound) {
             Y_OFFSET = 1.0f * (player.getY() - (SCALE*HEIGHT - bound)) / SCALE;
         }
-        Console.WriteLine(X_OFFSET);
-        // X_OFFSET = player.getX() / SCALE;
-        // Y_OFFSET = player.getY() / SCALE;
     }
 
     public void render(List<RenderObject> renderQueue) {
