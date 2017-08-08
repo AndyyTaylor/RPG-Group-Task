@@ -30,7 +30,7 @@ public class Map {
     }
     
     public void update(Player player) {
-        
+        Console.WriteLine(player.getX());
     }
 
     public void render(List<RenderObject> renderQueue) {
@@ -63,6 +63,6 @@ public class Map {
     }
     
     public int getYOff() {
-        return Y_OFFTET * SCALE;
+        return Y_OFFSET * SCALE;
     }
 }

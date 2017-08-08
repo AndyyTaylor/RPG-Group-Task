@@ -5,6 +5,7 @@ using System.Collections.Generic;
 
 public class MainForm : Form {  /* Main display window */
     private List<RenderObject> renderQueue = new List<RenderObject>();
+    private int X_OFFSET, Y_OFFSET;
     
     public MainForm (MainClass mainClass) {
         Text = "RPG Game";
@@ -40,5 +41,10 @@ public class MainForm : Form {  /* Main display window */
     
     public void clearQueue() {
         renderQueue.Clear();
+    }
+    
+    public void setOffsets(int _X_OFF, int _Y_OFF) {
+        X_OFFSET = _X_OFF;
+        Y_OFFSET = _Y_OFF;
     }
 }
