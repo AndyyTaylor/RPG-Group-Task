@@ -10,7 +10,7 @@ public class MainClass {    // OOP ftw
     EventHandler eventHandler;
     Map gameMap;
     Player player;
-    Enemy Enemy;
+    Enemy enemy;
     static Stopwatch stopWatch;
 
     bool closed = false;
@@ -19,19 +19,25 @@ public class MainClass {    // OOP ftw
         mainForm = new MainForm(this);
         gameMap = new Map();
         player = new Player(1, 1, Map.SCALE, Map.SCALE);
-        Enemy = new Enemy(50, 400, Map.SCALE, Map.SCALE);
+        enemy = new Enemy(50, 400, Map.SCALE, Map.SCALE);
 
         eventHandler = new EventHandler(mainForm, player);
     }
 
     public void update() {  /* Performs code logic */
         player.update();
+        enemy.moveToPlayer(player);
+        gameMap.update(player);
+        
+        mainForm.Invalidate();
     }
 
     public void render() {  /* Adds all rendering to mainForm.renderQueue */
         mainForm.clearQueue();
+        mainForm.setOffsets(gameMap.getXOff(), gameMap.getYOff());
         gameMap.render(mainForm.getRenderQueue());
         player.render(mainForm.getRenderQueue());
+        enemy.render(mainForm.getRenderQueue());
     }
 
     public void exit(Object sender, FormClosingEventArgs e) {  /* When window is closed */
@@ -52,7 +58,7 @@ public class MainClass {    // OOP ftw
             mainClass.render();
 
             Application.DoEvents();
-            System.Console.WriteLine(stopWatch.Elapsed);
+            // System.Console.WriteLine(stopWatch.Elapsed);
             stopWatch.Restart();
 
         }
