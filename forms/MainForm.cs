@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 public class MainForm : Form {  /* Main display window */
     private List<RenderObject> renderQueue = new List<RenderObject>();
-    private int X_OFFSET, Y_OFFSET;
+    private float X_OFFSET, Y_OFFSET;
     
     public MainForm (MainClass mainClass) {
         Text = "RPG Game";
@@ -29,9 +29,12 @@ public class MainForm : Form {  /* Main display window */
     
     protected override void OnPaint(PaintEventArgs e) {
         e.Graphics.Clear(Color.White);
+        
+        e.Graphics.TranslateTransform(-X_OFFSET, -Y_OFFSET);
         foreach (RenderObject renderObject in renderQueue) {
             renderObject.render(e);
         }
+
         renderQueue.Clear();
     }
     
@@ -43,7 +46,7 @@ public class MainForm : Form {  /* Main display window */
         renderQueue.Clear();
     }
     
-    public void setOffsets(int _X_OFF, int _Y_OFF) {
+    public void setOffsets(float _X_OFF, float _Y_OFF) {
         X_OFFSET = _X_OFF;
         Y_OFFSET = _Y_OFF;
     }

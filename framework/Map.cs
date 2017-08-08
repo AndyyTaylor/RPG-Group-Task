@@ -8,8 +8,8 @@ public class Map {
     private const int HEIGHT = 20;
     public const int SCALE = 700/(HEIGHT+1);
     
-    private int X_OFFSET = 0;
-    private int Y_OFFSET = 0;
+    private float X_OFFSET = 0;
+    private float Y_OFFSET = 0;
 
     private List<Tile> field = new List<Tile>();
 
@@ -30,7 +30,21 @@ public class Map {
     }
     
     public void update(Player player) {
-        Console.WriteLine(player.getX());
+        int bound = 100;
+        if (player.getX() - (X_OFFSET * SCALE) < bound) {
+            X_OFFSET = 1.0f * (player.getX() - bound) / SCALE;
+        } else if (player.getX() - (X_OFFSET * SCALE) > SCALE*WIDTH - bound) {
+            X_OFFSET = 1.0f * (player.getX() - (SCALE*WIDTH - bound)) / SCALE;
+        }
+        
+        if (player.getY() - (Y_OFFSET * SCALE) < bound) {
+            Y_OFFSET = 1.0f * (player.getY() - bound) / SCALE;
+        } else if (player.getY() - (Y_OFFSET * SCALE) > SCALE*HEIGHT - bound) {
+            Y_OFFSET = 1.0f * (player.getY() - (SCALE*HEIGHT - bound)) / SCALE;
+        }
+        Console.WriteLine(X_OFFSET);
+        // X_OFFSET = player.getX() / SCALE;
+        // Y_OFFSET = player.getY() / SCALE;
     }
 
     public void render(List<RenderObject> renderQueue) {
@@ -58,11 +72,11 @@ public class Map {
         return Array.FindIndex(types, t => t == type);
     }
     
-    public int getXOff() {
+    public float getXOff() {
         return X_OFFSET * SCALE;
     }
     
-    public int getYOff() {
+    public float getYOff() {
         return Y_OFFSET * SCALE;
     }
 }
