@@ -16,7 +16,6 @@ public class Map {
     public Map() {
         foreach (string line in File.ReadLines("maptest.txt")) {
             string[] args = line.Split('|');
-            Console.WriteLine(typeToInt(args[2]));
             createTile(typeToInt(args[2]), Int32.Parse(args[0]), Int32.Parse(args[1]), SCALE, SCALE);
         }
         
@@ -79,5 +78,19 @@ public class Map {
     
     public float getYOff() {
         return Y_OFFSET * SCALE;
+    }
+    
+    public List<Tile> tileAtPos(Player player) {
+        List<Tile> ret = new List<Tile>();
+        foreach (Tile tile in field) {
+            if (tile.getX() < player.getX() + player.getW()/2
+                && tile.getX() + tile.getW() > player.getX() + player.getW()/2
+                && tile.getY() < player.getY() + player.getH()/2
+                && tile.getY() + tile.getH() > player.getY() + player.getH()/2) {
+                    ret.Add(tile);
+                }
+        }
+        
+        return ret;
     }
 }

@@ -3,7 +3,7 @@ using System.Drawing;
 
 public abstract class Tile {
     protected int x, y, w, h;
-    protected bool walkable;
+    public bool walkable;
 
     public Tile(int _x, int _y, int _w, int _h) {
         x = _x;
@@ -16,4 +16,6 @@ public abstract class Tile {
     
     public int getX() { return x; }
     public int getY() { return y; }
+    public int getW() { return w; }
+    public int getH() { return h; }
 }

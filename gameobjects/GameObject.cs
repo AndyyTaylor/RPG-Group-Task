@@ -17,16 +17,10 @@ public abstract class GameObject {
     public abstract void render(List<RenderObject> renderQueue);
     public void moveX(int amt) { x += amt; }
 
-    public int GetX() {
-      return x;
-    }
-
-    public int GetY() {
-      return y;
-    }
-
     public void moveY(int amt) { y += amt; }
 
     public int getX() { return x; }
     public int getY() { return y; }
+    public int getW() { return w; }
+    public int getH() { return h; }
 }

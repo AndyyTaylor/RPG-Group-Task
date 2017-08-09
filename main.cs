@@ -25,7 +25,7 @@ public class MainClass {    // OOP ftw
     }
 
     public void update() {  /* Performs code logic */
-        player.update();
+        player.update(gameMap);
         enemy.moveToPlayer(player);
         gameMap.update(player);
         
@@ -60,7 +60,6 @@ public class MainClass {    // OOP ftw
             Application.DoEvents();
             System.Console.WriteLine(stopWatch.Elapsed);
             stopWatch.Restart();
-
         }
 
         System.Console.WriteLine("Exiting...");

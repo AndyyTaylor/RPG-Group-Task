@@ -9,7 +9,7 @@ public class Player : GameObject {
     }
 
     public override void update(Map gameMap) {
-        int dx = 10, dy = 10;
+        int dx = 0, dy = 0;
         if (movingRight) {
             dx = 10;
         }
@@ -21,6 +21,22 @@ public class Player : GameObject {
         }
         if (movingUp) {
             dy = -10;
+        }
+        
+        x += dx;
+        y += dy;
+        
+        List<Tile> tilesUnder = gameMap.tileAtPos(this);
+        bool walkable = false;
+        float speed =  90;
+        foreach (Tile tile in tilesUnder) {
+            walkable = tile.walkable || walkable;
+            speed = Math.Min(tile.speed, speed);
+        }
+        
+        if (!walkable) {
+            x -= dx;
+            y -= dy;
         }
     }
 

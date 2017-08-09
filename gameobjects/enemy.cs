@@ -12,13 +12,13 @@ public class Enemy : GameObject {
 
     public void moveToPlayer(Player player) {
       //if (Math.Abs(Player.GetX()- x))
-      if (player.GetX() < x) x -= 2;
-      else if (player.GetX() > x) x += 2;
+      if (player.getX() < x) x -= 2;
+      else if (player.getX() > x) x += 2;
 
-      if (player.GetY() < y) y -= 2;
-      else if (player.GetY() > y) y += 2;
+      if (player.getY() < y) y -= 2;
+      else if (player.getY() > y) y += 2;
 
-      if (Math.Sqrt((player.GetX() + w/2) - (x + w/2))*((player.GetX() + w/2)- (x + w/2))+((player.GetY() + h/2)- (y + h/2))*((player.GetY() + h/2 ) - (y + h/2)) < 200) {
+      if (Math.Sqrt((player.getX() + w/2) - (x + w/2))*((player.getX() + w/2)- (x + w/2))+((player.getY() + h/2)- (y + h/2))*((player.getY() + h/2 ) - (y + h/2)) < 200) {
         player.health -= 1;
         Console.WriteLine(player.health);
       }
