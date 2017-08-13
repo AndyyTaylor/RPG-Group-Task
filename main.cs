@@ -2,6 +2,7 @@ using System;
 using System.Windows.Forms;
 using System.Drawing;
 using System.Diagnostics;
+using System.Collections.Generic;
 
 public class MainClass {    // OOP ftw
 
@@ -10,7 +11,7 @@ public class MainClass {    // OOP ftw
     EventHandler eventHandler;
     Map gameMap;
     Player player;
-    Enemy enemy;
+    List<Enemy> enemies;
     static Stopwatch stopWatch;
 
     bool closed = false;
@@ -18,16 +19,18 @@ public class MainClass {    // OOP ftw
     public MainClass() {
         mainForm = new MainForm(this);
         gameMap = new Map();
+        enemies = new List<Enemy>();
+        
         player = new Player(Map.SCALE * Map.WIDTH, Map.SCALE * Map.HEIGHT, Map.SCALE, Map.SCALE);
-        enemy = new Enemy(50, 400, Map.SCALE, Map.SCALE);
+        enemies.Add(new Enemy(50, 400, Map.SCALE, Map.SCALE));
 
         eventHandler = new EventHandler(mainForm, player);
     }
 
     public void update() {  /* Performs code logic */
-        player.update(gameMap);
-        enemy.moveToPlayer(player);
         gameMap.update(player);
+        player.update(gameMap);
+        foreach(Enemy enemy in enemies) { enemy.moveToPlayer(player); }
         
         mainForm.Invalidate();
     }
@@ -37,7 +40,7 @@ public class MainClass {    // OOP ftw
         mainForm.setOffsets(gameMap.getXOff(), gameMap.getYOff());
         gameMap.render(mainForm.getRenderQueue());
         player.render(mainForm.getRenderQueue());
-        enemy.render(mainForm.getRenderQueue());
+        foreach(Enemy enemy in enemies) { enemy.render(mainForm.getRenderQueue()); }
     }
 
     public void exit(Object sender, FormClosingEventArgs e) {  /* When window is closed */

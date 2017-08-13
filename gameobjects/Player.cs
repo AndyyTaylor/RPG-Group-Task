@@ -28,7 +28,7 @@ public class Player : GameObject {
         
         List<Tile> tilesUnder = gameMap.tileAtPos(this);
         bool walkable = false;
-        float speed =  90;
+        float speed = 1;
         foreach (Tile tile in tilesUnder) {
             walkable = tile.walkable || walkable;
             speed = Math.Min(tile.speed, speed);
@@ -37,6 +37,12 @@ public class Player : GameObject {
         if (!walkable) {
             x -= dx;
             y -= dy;
+        } else if (speed < 1) {
+            x -= dx;
+            y -= dy;
+            
+            x += (int) (dx * speed);
+            y += (int) (dy * speed);
         }
     }
 

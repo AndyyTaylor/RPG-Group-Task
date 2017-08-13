@@ -4,6 +4,7 @@ using System.Drawing;
 public abstract class Tile {
     protected int x, y, w, h;
     public bool walkable;
+    public float speed = 1.0f;
 
     public Tile(int _x, int _y, int _w, int _h) {
         x = _x;
