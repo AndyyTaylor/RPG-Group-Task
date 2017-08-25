@@ -13,11 +13,18 @@ public abstract class GameObject {
         h = _h;
     }
 
-    public abstract void update(Map gameMap);
+    public void update(Map gameMap) {}
     public abstract void render(List<RenderObject> renderQueue);
     public void moveX(int amt) { x += amt; }
 
     public void moveY(int amt) { y += amt; }
+    public void takeDamage(int amt) { health -= amt; }
+    
+    public bool containsPoint(int px, int py) {
+        return px > x && px < x + w && py > y && py < y + h;
+    }
+    
+    public bool isDead() { return health <= 0; }
 
     public int getX() { return x; }
     public int getY() { return y; }

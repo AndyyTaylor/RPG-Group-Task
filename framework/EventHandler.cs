@@ -34,6 +34,9 @@ public class EventHandler {
                 if (!wPressed) player.toggleMoveUp();
                 wPressed = true;
                 break;
+            case (Keys.Space):
+                player.shoot();
+                break;
             default:
                 e.Handled = false;
                 break;

@@ -6,12 +6,8 @@ public class Enemy : GameObject {
     public Enemy(int _x, int _y, int _w, int _h) : base(_x, _y, _w, _h) {
 
     }
-    public override void update(Map gameMap) {
 
-    }
-
-    public void moveToPlayer(Player player) {
-      //if (Math.Abs(Player.GetX()- x))
+    public void update(Player player) {
       if (player.getX() < x) x -= 2;
       else if (player.getX() > x) x += 2;
 
@@ -28,6 +24,7 @@ public class Enemy : GameObject {
     }
 
     public override void render(List<RenderObject> renderQueue) {
-          renderQueue.Add(new RenderRect(x, y, w, h, Color.Black));
+        if (isDead()) return;
+        renderQueue.Add(new RenderRect(x, y, w, h, Color.Black));
     }
 }

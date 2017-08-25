@@ -12,6 +12,7 @@ public class MainClass {    // OOP ftw
     Map gameMap;
     Player player;
     List<Enemy> enemies;
+    List<Projectile> projectiles;
     static Stopwatch stopWatch;
 
     bool closed = false;
@@ -20,6 +21,7 @@ public class MainClass {    // OOP ftw
         mainForm = new MainForm(this);
         gameMap = new Map();
         enemies = new List<Enemy>();
+        projectiles = new List<Projectile>();
         
         player = new Player(Map.SCALE * Map.WIDTH, Map.SCALE * Map.HEIGHT, Map.SCALE, Map.SCALE);
         enemies.Add(new Enemy(50, 400, Map.SCALE, Map.SCALE));
@@ -29,8 +31,9 @@ public class MainClass {    // OOP ftw
 
     public void update() {  /* Performs code logic */
         gameMap.update(player);
-        player.update(gameMap);
-        foreach(Enemy enemy in enemies) { enemy.moveToPlayer(player); }
+        player.update(gameMap, projectiles);
+        foreach(Enemy enemy in enemies) { enemy.update(player); }
+        foreach(Projectile proj in projectiles) { proj.update(player, enemies); }
         
         mainForm.Invalidate();
     }
@@ -41,6 +44,7 @@ public class MainClass {    // OOP ftw
         gameMap.render(mainForm.getRenderQueue());
         player.render(mainForm.getRenderQueue());
         foreach(Enemy enemy in enemies) { enemy.render(mainForm.getRenderQueue()); }
+        foreach(Projectile proj in projectiles) { proj.render(mainForm.getRenderQueue()); }
     }
 
     public void exit(Object sender, FormClosingEventArgs e) {  /* When window is closed */
@@ -51,7 +55,7 @@ public class MainClass {    // OOP ftw
         return closed;
     }
 
-    static public void Main () {  /* Main game loop */
+    public static void Main () {  /* Main game loop */
         MainClass mainClass = new MainClass();
         stopWatch = new Stopwatch();
 
@@ -61,7 +65,7 @@ public class MainClass {    // OOP ftw
             mainClass.render();
 
             Application.DoEvents();
-            System.Console.WriteLine(stopWatch.Elapsed);
+            // System.Console.WriteLine(stopWatch.Elapsed);
             stopWatch.Restart();
         }
 

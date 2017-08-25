@@ -3,12 +3,13 @@ using System.Drawing;
 using System.Collections.Generic;
 
 public class Player : GameObject {
-    private bool movingRight, movingLeft, movingUp, movingDown;
+    private bool movingRight, movingLeft, movingUp, movingDown, shooting;
+    public int score = 0;
     public Player(int _x, int _y, int _w, int _h) : base(_x, _y, _w, _h) {
 
     }
 
-    public override void update(Map gameMap) {
+    public void update(Map gameMap, List<Projectile> projectiles) {
         int dx = 0, dy = 0;
         if (movingRight) {
             dx = 10;
@@ -44,6 +45,11 @@ public class Player : GameObject {
             x += (int) (dx * speed);
             y += (int) (dy * speed);
         }
+        
+        if (shooting) {
+            projectiles.Add(new Projectile(x+w/2, y+h/2, 5, 5, -dx, -dy));
+            shooting = false;
+        }
     }
 
     public override void render(List<RenderObject> renderQueue) {
@@ -68,5 +74,9 @@ public class Player : GameObject {
     public void toggleMoveDown() {
         if (movingDown) movingDown = false;
         else movingDown = true;
+    }
+    
+    public void shoot() {
+        shooting = true;
     }
 }

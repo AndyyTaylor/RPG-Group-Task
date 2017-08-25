@@ -18,14 +18,6 @@ public class Map {
             string[] args = line.Split('|');
             createTile(typeToInt(args[2]), Int32.Parse(args[0]), Int32.Parse(args[1]), SCALE, SCALE);
         }
-        
-        /* for (int x = 0; x < WIDTH; x++) {
-            for (int y = 0; y < HEIGHT; y++) {
-                if (Math.Abs(x - WIDTH/2) < 2) field.Add(new Water(x*SCALE, y*SCALE, SCALE, SCALE));
-                else if (Math.Abs(x - WIDTH/2) < 5) field.Add(new Sand(x*SCALE, y*SCALE, SCALE, SCALE));
-                else field.Add(new Grass(x*SCALE, y*SCALE, SCALE, SCALE));
-            }
-        } */
     }
     
     public void update(Player player) {
@@ -41,6 +33,11 @@ public class Map {
         } else if (player.getY() - (Y_OFFSET * SCALE) > SCALE*HEIGHT - bound) {
             Y_OFFSET = 1.0f * (player.getY() - (SCALE*HEIGHT - bound)) / SCALE;
         }
+        
+        if (X_OFFSET < 0) X_OFFSET = 0;
+        else if (X_OFFSET > bound - WIDTH) X_OFFSET = bound - WIDTH;
+        if (Y_OFFSET < 0) Y_OFFSET = 0;
+        else if (Y_OFFSET > bound - HEIGHT) Y_OFFSET = bound - HEIGHT;
     }
 
     public void render(List<RenderObject> renderQueue) {
