@@ -8,6 +8,8 @@ public class MainForm : Form {  /* Main display window */
     private float X_OFFSET, Y_OFFSET;
     Label label;
     PictureBox picturebox;
+    
+    public bool reset = false;     // Pretend this isnt here
 
     public MainForm (MainClass mainClass) {
         Text = "RPG Game";

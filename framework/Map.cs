@@ -14,7 +14,7 @@ public class Map {
     private List<Tile> field = new List<Tile>();
 
     public Map() {
-        foreach (string line in File.ReadLines("maptest.txt")) {
+        foreach (string line in File.ReadLines("data/map.txt")) {
             string[] args = line.Split('|');
             createTile(typeToInt(args[2]), Int32.Parse(args[0]), Int32.Parse(args[1]), SCALE, SCALE);
         }

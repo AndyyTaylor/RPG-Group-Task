@@ -2,12 +2,14 @@ using System;
 using System.Windows.Forms;
 
 public class EventHandler {
-    Player player;
+    public Player player;
     
     bool aPressed, dPressed, sPressed, wPressed;
+    MainForm mainForm;
     
-    public EventHandler(Form mainForm, Player _player) {
+    public EventHandler(MainForm _mainForm, Player _player) {
         player = _player;
+        mainForm = _mainForm;
         
         mainForm.KeyPreview = true;
         mainForm.KeyDown += new KeyEventHandler(keyDown);
@@ -18,24 +20,27 @@ public class EventHandler {
         e.Handled = true;
         
         switch (e.KeyCode) {
-            case (Keys.A):
+            case (Keys.Left):
                 if (!aPressed) player.toggleMoveLeft();
                 aPressed = true;
                 break;
-            case (Keys.D):
+            case (Keys.Right):
                 if (!dPressed) player.toggleMoveRight();
                 dPressed = true;
                 break;
-            case (Keys.S):
+            case (Keys.Down):
                 if (!sPressed) player.toggleMoveDown();
                 sPressed = true;
                 break;
-            case (Keys.W):
+            case (Keys.Up):
                 if (!wPressed) player.toggleMoveUp();
                 wPressed = true;
                 break;
             case (Keys.Space):
                 player.shoot();
+                break;
+            case (Keys.R):
+                mainForm.reset = true;
                 break;
             default:
                 e.Handled = false;
@@ -47,19 +52,19 @@ public class EventHandler {
         e.Handled = true;
         
         switch (e.KeyCode) {
-            case (Keys.A):
+            case (Keys.Left):
                 aPressed = false;
                 player.toggleMoveLeft();
                 break;
-            case (Keys.D):
+            case (Keys.Right):
                 dPressed = false;
                 player.toggleMoveRight();
                 break;
-            case (Keys.S):
+            case (Keys.Down):
                 sPressed = false;
                 player.toggleMoveDown();
                 break;
-            case (Keys.W):
+            case (Keys.Up):
                 wPressed = false;
                 player.toggleMoveUp();
                 break;

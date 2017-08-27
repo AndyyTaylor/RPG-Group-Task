@@ -6,8 +6,6 @@ using System.Collections.Generic;
 using System.Linq;
 
 public class MainClass {    // OOP ftw
-
-    // Forms
     MainForm mainForm;
     EventHandler eventHandler;
     Map gameMap;
@@ -33,6 +31,12 @@ public class MainClass {    // OOP ftw
     }
 
     public void update() {  /* Performs code logic */
+        if (player.health <= 0) {
+            if (mainForm.reset) {
+                reset();
+            }
+            return;
+        }
         tick++;
         gameMap.update(player);
         player.update(gameMap, projectiles);
@@ -43,23 +47,7 @@ public class MainClass {    // OOP ftw
         projectiles = projectiles.Where(p => !p.isDead()).ToList();
         
         if (tick % 400 == 0) {
-            int num_enemies = (tick / 200) * 2;
-            int num_ranged = 1;
-            int num_bosses = 0;
-            while (num_enemies - 20 > 3) {
-                num_ranged += 1;
-                num_enemies -= 3;
-            }
-            while (num_ranged - 10 > 5) {
-                num_ranged -= 5;
-                num_bosses += 1;
-            }
-            
-            for (int i = 0; i < num_enemies; i++) { enemies.Add(new Enemy(rnd.Next(0, Map.WIDTH * Map.SCALE), rnd.Next(0, Map.HEIGHT * Map.SCALE), Map.SCALE, Map.SCALE)); }
-            for (int i = 0; i < num_ranged; i++) { enemies.Add(new Ranged(rnd.Next(0, Map.WIDTH * Map.SCALE), rnd.Next(0, Map.HEIGHT * Map.SCALE), Map.SCALE, Map.SCALE)); }
-            for (int i = 0; i < num_enemies; i++) { enemies.Add(new Enemy(rnd.Next(0, Map.WIDTH * Map.SCALE), rnd.Next(0, Map.HEIGHT * Map.SCALE), Map.SCALE, Map.SCALE)); }
-            
-            System.Console.WriteLine(num_ranged.ToString() + " spawned");
+            spawnWave();
         }
         
         mainForm.Invalidate();
@@ -72,6 +60,35 @@ public class MainClass {    // OOP ftw
         player.render(mainForm.getRenderQueue());
         foreach(Enemy enemy in enemies) { enemy.render(mainForm.getRenderQueue()); }
         foreach(Projectile proj in projectiles) { proj.render(mainForm.getRenderQueue()); }
+    }
+    
+    public void spawnWave() {
+        int num_enemies = (tick / 200) * 2;
+        int num_ranged = 1;
+        int num_bosses = 0;
+        while (num_enemies - 20 > 3) {
+            num_ranged += 1;
+            num_enemies -= 3;
+        }
+        while (num_ranged - 10 > 5) {
+            num_ranged -= 5;
+            num_bosses += 1;
+        }
+        
+        for (int i = 0; i < num_enemies; i++) { enemies.Add(new Enemy(rnd.Next(0, Map.WIDTH * Map.SCALE), rnd.Next(0, Map.HEIGHT * Map.SCALE), Map.SCALE, Map.SCALE)); }
+        for (int i = 0; i < num_ranged; i++) { enemies.Add(new Ranged(rnd.Next(0, Map.WIDTH * Map.SCALE), rnd.Next(0, Map.HEIGHT * Map.SCALE), Map.SCALE, Map.SCALE)); }
+        for (int i = 0; i < num_enemies; i++) { enemies.Add(new Enemy(rnd.Next(0, Map.WIDTH * Map.SCALE), rnd.Next(0, Map.HEIGHT * Map.SCALE), Map.SCALE, Map.SCALE)); }
+        
+        System.Console.WriteLine(num_ranged.ToString() + " spawned");
+    }
+    
+    public void reset() {
+        mainForm.reset = false;
+        player = new Player(Map.SCALE * Map.WIDTH, Map.SCALE * Map.HEIGHT, Map.SCALE, Map.SCALE);
+        eventHandler.player = player;
+        tick = 0;
+        enemies.Clear();
+        projectiles.Clear();
     }
 
     public void exit(Object sender, FormClosingEventArgs e) {  /* When window is closed */
