@@ -47,7 +47,7 @@ public class Player : GameObject {
         }
         
         if (shooting) {
-            projectiles.Add(new Projectile(x+w/2, y+h/2, 5, 5, -dx, -dy));
+            projectiles.Add(new Projectile(x+w/2, y+h/2, 5, 5, -dx, -dy, 1, true));
             shooting = false;
         }
     }

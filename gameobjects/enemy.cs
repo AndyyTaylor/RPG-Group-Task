@@ -4,10 +4,10 @@ using System.Collections.Generic;
 
 public class Enemy : GameObject {
     public Enemy(int _x, int _y, int _w, int _h) : base(_x, _y, _w, _h) {
-
+        health = 5;
     }
 
-    public void update(Player player) {
+    public virtual void update(Player player, List<Projectile> projectiles) {
       if (player.getX() < x) x -= 2;
       else if (player.getX() > x) x += 2;
 
