@@ -4,12 +4,18 @@ using System.Collections.Generic;
 
 public class Player : GameObject {
     private bool movingRight, movingLeft, movingUp, movingDown, shooting;
-    public int score = 0;
+    public int bulletPower, money, id, godmode, wave;
+    
     public Player(int _x, int _y, int _w, int _h) : base(_x, _y, _w, _h) {
-
+        bulletPower = 1;
+        money = 0;
+        godmode = 0;
+        wave = 0;
     }
 
     public void update(Map gameMap, List<Projectile> projectiles) {
+        godmode--;
+        godmode = Math.Max(0, godmode);
         int dx = 0, dy = 0;
         if (movingRight) {
             dx = 10;
@@ -47,7 +53,7 @@ public class Player : GameObject {
         }
         
         if (shooting) {
-            projectiles.Add(new Projectile(x+w/2, y+h/2, 5, 5, -dx, -dy, 1, true));
+            projectiles.Add(new Projectile(x+w/2, y+h/2, 5, 5, -dx, -dy, bulletPower, true));
             shooting = false;
         }
     }
@@ -74,6 +80,10 @@ public class Player : GameObject {
     public void toggleMoveDown() {
         if (movingDown) movingDown = false;
         else movingDown = true;
+    }
+    
+    public override void takeDamage(int amt) {
+        if (godmode <= 0) { health -= amt; }
     }
     
     public void shoot() {

@@ -18,7 +18,7 @@ public abstract class GameObject {
     public void moveX(int amt) { x += amt; }
 
     public void moveY(int amt) { y += amt; }
-    public void takeDamage(int amt) { health -= amt; }
+    public virtual void takeDamage(int amt) { health -= amt; }
     
     public bool containsPoint(int px, int py) {
         return px > x && px < x + w && py > y && py < y + h;

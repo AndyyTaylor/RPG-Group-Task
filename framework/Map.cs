@@ -6,6 +6,8 @@ public class Map {
     // WIDTH AND HEIGHT OF EACH TILE
     public const int WIDTH = 30;
     public const int HEIGHT = 30;
+    public const int TWIDTH = 200;
+    public const int THEIGHT = 200;
     public const int SCALE = 700/(HEIGHT+1);
     
     private float X_OFFSET = 0;

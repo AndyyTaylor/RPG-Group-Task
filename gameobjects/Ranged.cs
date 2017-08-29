@@ -7,6 +7,7 @@ public class Ranged : Enemy {
     
     public Ranged(int _x, int _y, int _w, int _h) : base(_x, _y, _w, _h) {
         health = 2;
+        reward = 15;
     }
 
     public override void update(Player player, List<Projectile> projectiles) {
@@ -19,7 +20,7 @@ public class Ranged : Enemy {
         if (player.getY() < y) dy -= 2;
         else if (player.getY() > y) dy += 2;
 
-        if (Math.Sqrt(Math.Pow(x-player.getX(), 2) + Math.Pow(y-player.getY(), 2)) < Map.SCALE * 10) {
+        if (Math.Sqrt(Math.Pow(x-(player.getX()), 2) + Math.Pow(y-(player.getY()), 2)) < Map.SCALE * 10) {
             dx *= -1;
             dy *= -1;
         }

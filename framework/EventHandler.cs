@@ -18,7 +18,7 @@ public class EventHandler {
     
     public void keyDown(object sender, KeyEventArgs e) {
         e.Handled = true;
-        
+        mainForm.label.Focus();
         switch (e.KeyCode) {
             case (Keys.Left):
                 if (!aPressed) player.toggleMoveLeft();
