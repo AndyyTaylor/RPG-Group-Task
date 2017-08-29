@@ -7,6 +7,6 @@ public class Water : Tile {
     }
 
     public override RenderObject getRenderObject() {
-        return new RenderRect(x, y, w, h, Color.Blue);
+        return new RenderRect(x, y, w, h, Color.FromArgb(102, 140, 157));
     }
 }

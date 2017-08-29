@@ -5,14 +5,19 @@ using System.Collections.Generic;
 public class Projectile : GameObject {
     public int dx, dy;
     public bool playerTeam;
+    int tick;
     
     public Projectile(int _x, int _y, int _w, int _h, int _dx, int _dy, int pierc, bool _playerTeam) : base(_x, _y, _w, _h) {
         dx = _dx;
         dy = _dy;
         playerTeam = _playerTeam;
         health = pierc;
+        tick = 0;
     }
     public void update(Player player, List<Enemy> enemies) {
+        if (tick++ > 300) {
+            health = -1;
+        }
         x += dx;
         y += dy;
         

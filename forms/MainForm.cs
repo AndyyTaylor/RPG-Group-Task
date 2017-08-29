@@ -181,7 +181,7 @@ public class MainForm : Form {  /* Main display window */
             player.money = Int32.Parse(args[4]);
             player.godmode = Int32.Parse(args[5]);
             player.id = num;
-            player.wave = Int32.Parse(args[6]-1);
+            player.wave = Int32.Parse(args[6])-1;
             return player;
         }
         return null;

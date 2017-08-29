@@ -3,14 +3,16 @@ using System.Drawing;
 using System.Collections.Generic;
 
 public class Player : GameObject {
-    private bool movingRight, movingLeft, movingUp, movingDown, shooting;
+    private bool movingRight, movingLeft, movingUp, movingDown, shooting, onWater;
     public int bulletPower, money, id, godmode, wave;
+    
     
     public Player(int _x, int _y, int _w, int _h) : base(_x, _y, _w, _h) {
         bulletPower = 1;
         money = 0;
         godmode = 0;
         wave = 0;
+        onWater = true;
     }
 
     public void update(Map gameMap, List<Projectile> projectiles) {
@@ -41,7 +43,9 @@ public class Player : GameObject {
             speed = Math.Min(tile.speed, speed);
         }
         
-        if (!walkable) {
+        if (walkable) onWater = false;
+        
+        if (!walkable && !onWater) {
             x -= dx;
             y -= dy;
         } else if (speed < 1) {
