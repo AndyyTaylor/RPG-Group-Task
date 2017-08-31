@@ -14,12 +14,12 @@ public class Projectile : GameObject {
         health = pierc;
         tick = 0;
     }
-    public void update(Player player, List<Enemy> enemies) {
+    public void update(Player player, List<Enemy> enemies, float elapsed) {
         if (tick++ > 300) {
             health = -1;
         }
-        x += dx;
-        y += dy;
+        x += dx * elapsed;
+        y += dy * elapsed;
         
         if (playerTeam) {
             for (int i = 0; i < enemies.Count; i++) {
@@ -38,6 +38,6 @@ public class Projectile : GameObject {
     }
 
     public override void render(List<RenderObject> renderQueue) {
-          renderQueue.Add(new RenderRect(x, y, w, h, Color.Red));
+          renderQueue.Add(new RenderRect((int) x, (int) y, w, h, Color.Red));
     }
 }

@@ -188,7 +188,7 @@ public class MainForm : Form {  /* Main display window */
     }
     
     public void savePlayer(Player p) {
-        string text = p.getX().ToString() + "|" + p.getY().ToString() + "|" + p.health.ToString() + "|" + p.bulletPower.ToString() + "|" + p.money.ToString() + "|" + p.godmode.ToString() + "|" + p.wave.ToString();
+        string text = ((int) p.getX()).ToString() + "|" + ((int) p.getY()).ToString() + "|" + ((int) p.health).ToString() + "|" + ((int) p.bulletPower).ToString() + "|" + ((int) p.money).ToString() + "|" + ((int) p.godmode).ToString() + "|" + ((int) p.wave).ToString();
         System.IO.File.WriteAllText("data/char" + p.id.ToString() + ".txt", text);
     }
     

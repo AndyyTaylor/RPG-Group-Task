@@ -15,10 +15,10 @@ public class Player : GameObject {
         onWater = true;
     }
 
-    public void update(Map gameMap, List<Projectile> projectiles) {
+    public void update(Map gameMap, List<Projectile> projectiles, float elapsed) {
         godmode--;
         godmode = Math.Max(0, godmode);
-        int dx = 0, dy = 0;
+        float dx = 0, dy = 0;
         if (movingRight) {
             dx = 10;
         }
@@ -31,6 +31,9 @@ public class Player : GameObject {
         if (movingUp) {
             dy = -10;
         }
+        
+        dx *= elapsed;
+        dy *= elapsed;
         
         x += dx;
         y += dy;
@@ -52,18 +55,18 @@ public class Player : GameObject {
             x -= dx;
             y -= dy;
             
-            x += (int) (dx * speed);
-            y += (int) (dy * speed);
+            x += dx * speed;
+            y += dy * speed;
         }
         
         if (shooting) {
-            projectiles.Add(new Projectile(x+w/2, y+h/2, 5, 5, -dx, -dy, bulletPower, true));
+            projectiles.Add(new Projectile((int) (x+w/2), (int) (y+h/2), 5, 5, (int) -dx, (int) -dy, bulletPower, true));
             shooting = false;
         }
     }
 
     public override void render(List<RenderObject> renderQueue) {
-        renderQueue.Add(new RenderRect(x, y, w, h, Color.Red));
+        renderQueue.Add(new RenderRect((int) x, (int) y, w, h, Color.Red));
     }
 
     public void toggleMoveRight() {

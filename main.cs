@@ -31,7 +31,7 @@ public class MainClass {    // OOP ftw
         eventHandler = new EventHandler(mainForm, player);
     }
 
-    public void update() {  /* Performs code logic */
+    public void update(float elapsed) {  /* Performs code logic */
         if (prevPlayerId != mainForm.player.id) {
             player = mainForm.player;
             eventHandler.player = player;
@@ -48,10 +48,10 @@ public class MainClass {    // OOP ftw
         }
 
         gameMap.update(player);
-        player.update(gameMap, projectiles);
-        foreach(Projectile proj in projectiles) { proj.update(player, enemies); }
+        player.update(gameMap, projectiles, elapsed);
+        foreach(Projectile proj in projectiles) { proj.update(player, enemies, elapsed); }
         foreach(Enemy enemy in enemies) {
-            enemy.update(player, projectiles);
+            enemy.update(player, projectiles, elapsed);
             if (enemy.isDead()) {
                 player.money += enemy.reward;
             }
@@ -112,15 +112,15 @@ public class MainClass {    // OOP ftw
     public static void Main () {  /* Main game loop */
         MainClass mainClass = new MainClass();
         stopWatch = new Stopwatch();
-
+        stopWatch.Start();
         while (!mainClass.checkClosed()) {
-            stopWatch.Start();
-            mainClass.update();
+            mainClass.update(stopWatch.ElapsedMilliseconds/30.0f);
+            stopWatch.Restart();
             mainClass.render();
 
             Application.DoEvents();
             // System.Console.WriteLine(stopWatch.Elapsed);
-            stopWatch.Restart();
+            
         }
 
         System.Console.WriteLine("Exiting...");

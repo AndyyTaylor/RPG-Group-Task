@@ -10,7 +10,7 @@ public class Ranged : Enemy {
         reward = 15;
     }
 
-    public override void update(Player player, List<Projectile> projectiles) {
+    public override void update(Player player, List<Projectile> projectiles, float elapsed) {
         tick++;
         int dx = 0;
         int dy = 0;
@@ -28,15 +28,15 @@ public class Ranged : Enemy {
         if (tick > 50) {
             tick = 0;
             double theta = Math.Atan2(y - player.getY(), x - player.getX());
-            projectiles.Add(new Projectile(x + w/2, y + h/2, 5, 5, (int) -(Math.Cos(theta)*5), (int) -(Math.Sin(theta)*5), 1, false));
+            projectiles.Add(new Projectile((int) (x + w/2), (int) (y + h/2), 5, 5, (int) -(Math.Cos(theta)*5), (int) -(Math.Sin(theta)*5), 1, false));
         }
         
-        x += dx;
-        y += dy;
+        x += dx * elapsed;
+        y += dy * elapsed;
     }
 
     public override void render(List<RenderObject> renderQueue) {
         if (isDead()) return;
-        renderQueue.Add(new RenderRect(x, y, w, h, Color.Blue));
+        renderQueue.Add(new RenderRect((int) x, (int) y, w, h, Color.Blue));
     }
 }

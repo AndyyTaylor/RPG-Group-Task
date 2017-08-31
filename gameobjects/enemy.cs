@@ -9,12 +9,12 @@ public class Enemy : GameObject {
         health = 5;
     }
 
-    public virtual void update(Player player, List<Projectile> projectiles) {
-      if (player.getX() < x) x -= 2;
-      else if (player.getX() > x) x += 2;
+    public virtual void update(Player player, List<Projectile> projectiles, float elapsed) {
+      if (player.getX() < x) x -= 2 * elapsed;
+      else if (player.getX() > x) x += 2 * elapsed;
 
-      if (player.getY() < y) y -= 2;
-      else if (player.getY() > y) y += 2;
+      if (player.getY() < y) y -= 2 * elapsed;
+      else if (player.getY() > y) y += 2 * elapsed;
 
       if (Math.Sqrt((player.getX() + w/2) - (x + w/2))*((player.getX() + w/2)- (x + w/2))+((player.getY() + h/2)- (y + h/2))*((player.getY() + h/2 ) - (y + h/2)) < 200) {
         player.takeDamage(1);
@@ -27,6 +27,6 @@ public class Enemy : GameObject {
 
     public override void render(List<RenderObject> renderQueue) {
         if (isDead()) return;
-        renderQueue.Add(new RenderRect(x, y, w, h, Color.Black));
+        renderQueue.Add(new RenderRect((int) x, (int) y, w, h, Color.Black));
     }
 }

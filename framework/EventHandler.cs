@@ -20,19 +20,19 @@ public class EventHandler {
         e.Handled = true;
         mainForm.label.Focus();
         switch (e.KeyCode) {
-            case (Keys.Left):
+            case (Keys.A):
                 if (!aPressed) player.toggleMoveLeft();
                 aPressed = true;
                 break;
-            case (Keys.Right):
+            case (Keys.D):
                 if (!dPressed) player.toggleMoveRight();
                 dPressed = true;
                 break;
-            case (Keys.Down):
+            case (Keys.S):
                 if (!sPressed) player.toggleMoveDown();
                 sPressed = true;
                 break;
-            case (Keys.Up):
+            case (Keys.W):
                 if (!wPressed) player.toggleMoveUp();
                 wPressed = true;
                 break;
@@ -52,19 +52,19 @@ public class EventHandler {
         e.Handled = true;
         
         switch (e.KeyCode) {
-            case (Keys.Left):
+            case (Keys.A):
                 aPressed = false;
                 player.toggleMoveLeft();
                 break;
-            case (Keys.Right):
+            case (Keys.D):
                 dPressed = false;
                 player.toggleMoveRight();
                 break;
-            case (Keys.Down):
+            case (Keys.S):
                 sPressed = false;
                 player.toggleMoveDown();
                 break;
-            case (Keys.Up):
+            case (Keys.W):
                 wPressed = false;
                 player.toggleMoveUp();
                 break;
